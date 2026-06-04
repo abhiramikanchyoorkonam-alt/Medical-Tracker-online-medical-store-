@@ -52,3 +52,4 @@ def search_medicines(request):
     else:
         medicines = Medicine.objects.all()
     return render(request, 'search_medicines.html', {'medicines': medicines})   
+

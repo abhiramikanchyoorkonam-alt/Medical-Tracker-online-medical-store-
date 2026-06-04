@@ -1,5 +1,5 @@
 from django import forms
-from .models import Contact, registration
+from .models import Contact, login, registration
 class ContactForm(forms.ModelForm):
     class Meta:
         model = Contact
@@ -24,5 +24,13 @@ class regForm(forms.ModelForm):
             'gender': forms.TextInput(attrs={'class': 'form-control'}),
             'blood_group': forms.TextInput(attrs={'class': 'form-control'}),
             'state': forms.TextInput(attrs={'class': 'form-control'}),
+            'password': forms.PasswordInput(attrs={'class': 'form-control'}),
+        }
+class loginForm(forms.ModelForm):
+    class Meta:
+        model = login
+        fields = ['username', 'password']
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control'}),
             'password': forms.PasswordInput(attrs={'class': 'form-control'}),
         }

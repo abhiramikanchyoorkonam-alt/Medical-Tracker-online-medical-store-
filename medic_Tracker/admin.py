@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Medicine
+from .models import Medicine, registration
 from .models import Contact
 
 # Register your models here.
@@ -16,3 +16,8 @@ admin.site.register(Contact, ContactAdmin)
 class registrationAdmin(admin.ModelAdmin):
     list_display = ('username', 'first_name', 'last_name', 'email', 'phone_number', 'address','age','gender','blood_group','state','password','created_at')
     search_fields = ('username', 'email')
+admin.site.register(registration, registrationAdmin)
+
+class loginAdmin(admin.ModelAdmin):
+    list_display = ('username', 'password')
+    search_fields = ('username',)
