@@ -13,6 +13,10 @@
     font-family:'Poppins',sans-serif;
 }
 
+body {
+    padding-top: 70px;
+}
+
 body{
     min-height:100vh;
     display:flex;
@@ -92,6 +96,8 @@ textarea:focus{
     background:rgba(255,255,255,0.3);
 }
 
+.btn-3,
+.btn-secondary,
 .btn-primary{
     width:100%;
     padding:14px;
@@ -105,6 +111,8 @@ textarea:focus{
     transition:0.3s;
 }
 
+.btn-3,
+.btn-secondary:hover,
 .btn-primary:hover{
     transform:translateY(-3px);
 }
@@ -129,23 +137,28 @@ textarea:focus{
 }</style>
 </head>
 <body>
+    <header>
      <nav class="navbar navbar-expand-lg custom-navbar">
     <div class="container">
         <a class="navbar-brand" href="{% url 'home.html' %}">💊 Medicine Tracker</a>
         <button class="navbar-toggler" type="button"data-bs-toggle="collapse"data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span></button>
     </div>
-    </nav>
+    </nav></header>
     <div class="container d-flex flex-column align-items-center justify-content-center" style="min-height: 100vh;">
     <h1>Register now</h1>
     <form method="post" action="">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+        <br><br>
+        <button type="reset" class="btn btn-3" name="submit">Reset</button>
     </form>
     {% if success_message %}
         <div class="alert alert-success mt-3">{{ success_message }} </div>
       {% endif %}
+      <br>
+      <button type="submit" class="btn btn-secondary" name="submiit"> <a href="{% url 'home.html' %}">home</a></button>
     </div>
 </body>
 </html>
