@@ -7,5 +7,8 @@ urlpatterns = [
     path('contact/', views.contact, name='contact.html'),
     path('search_medicines/', views.search_medicines, name='search_medicines.html'),    
     path('reg_form/', views.reg_form, name='reg_form.html'),
-    path('login_form/', views.login_form, name='login_form.html'),
+    path('login/', views.login, name='login.html'),
+    path('logout/', views.logout, name='logout.html'),
+    path('login/<str:username>/<str:password>/', views.login, name='login.html'),
+    path('user_interface/', views.user_interface, name='user_interface.html'),
 ]

@@ -10,11 +10,14 @@
 <body>
     <div class="container">
         <h1>Login Here</h1>
-        <form method="post" action="{% url 'login_form.html' %}">
+        <form method="post" action="{% url 'login.html' %}">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit">Login</button>
+            <button type="submit" action="{% url 'user_interface.html' %}">Login</button>
         </form>
+        {% if error_message %}
+            <p style="color: red;">{{ error_message }}</p>
+        {% endif %}
     </div>
 </body>
 </html>

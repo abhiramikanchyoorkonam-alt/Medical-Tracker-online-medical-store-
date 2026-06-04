@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render,redirect,get_list_or_404
-from .forms import ContactForm, regForm
+from .forms import ContactForm, loginForm, regForm
 from .models import Medicine, Contact
 
 def about(request):
@@ -53,3 +53,24 @@ def search_medicines(request):
         medicines = Medicine.objects.all()
     return render(request, 'search_medicines.html', {'medicines': medicines})   
 
+
+def login(request):
+    error_message = None
+    form = loginForm()
+
+    if request.method == 'POST':
+        form = loginForm(request.POST)
+
+        if form.is_valid():
+            form.save()  # optional
+        else:
+            error_message = "Invalid username or password."
+
+    return render(request, 'login.html', {
+        'form': form,
+        'error_message': error_message
+    })
+def user_interface(request):
+    return render(request, 'user_interface.html')
+def logout(request):
+    return render(request, 'logout.html')
