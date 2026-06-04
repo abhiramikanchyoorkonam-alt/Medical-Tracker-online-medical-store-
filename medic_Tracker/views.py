@@ -45,13 +45,21 @@ def reg_form(request):
     return render(request, 'reg_form.html', {'form': form, 'success_message': success_message })
 
 
-def search_medicines(request):
-    query = request.GET.get('q')
+
+def search(request):
+    query = request.GET.get('q', '')
+
+    medicines = Medicine.objects.all()
+
     if query:
         medicines = Medicine.objects.filter(name__icontains=query)
     else:
-        medicines = Medicine.objects.all()
-    return render(request, 'search_medicines.html', {'medicines': medicines})   
+        medicines=Medicine.objects.filter(name__icontains=query)
+
+    return render(request, 'search.html', {
+        'medicines': medicines,
+        'query': query
+    })
 
 
 def login(request):

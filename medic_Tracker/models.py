@@ -36,7 +36,7 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.name
-    
+
 
 class login(models.Model):
     username = models.CharField(max_length=100)
@@ -56,3 +56,6 @@ class logout(models.Model):
 
     def __str__(self):
         return self.username
+
+    
+    
