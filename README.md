@@ -19,7 +19,7 @@ Ensure you have Python and Django installed.
 Run python manage.py migrate to set up the database.
 Create a superuser with python manage.py createsuperuser to access the admin dashboard.
 Run the server: python manage.py runserver.
-Visit http://127.0.0.1:8000/main/ to access the dashboard.
+Visit http://127.0.0.1:8000/to access the dashboard.
 Future Improvements
 Add user authentication for registered users.
 Implement password hashing for security.
