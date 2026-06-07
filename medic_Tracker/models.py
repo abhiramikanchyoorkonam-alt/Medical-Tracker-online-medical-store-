@@ -44,12 +44,7 @@ class login(models.Model):
 
     def __str__(self):
         return self.username
-class user_interface(models.Model):
-    username = models.CharField(max_length=100)
-    password = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.username
+        
 class logout(models.Model):
     username = models.CharField(max_length=100)
     password = models.CharField(max_length=100)
@@ -57,5 +52,6 @@ class logout(models.Model):
     def __str__(self):
         return self.username
 
-    
+
+     
     

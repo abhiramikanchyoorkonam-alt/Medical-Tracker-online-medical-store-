@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <style>
+        body{
+            font-family:Arial,sans-serif;
+           background-image:url('https://images.unsplash.com/photo-1587854692152-cbe660dbde88');
+           background-size:cover;
+            background-position:center;
+            background-repeat:no-repeat;
+            margin:0;
+            padding:20px;
+        }
+
+        h1{
+            text-align:center;
+            color:#333;
+        }
+
+        .top-bar{
+            display:flex;
+            justify-content:space-between;
+            margin-bottom:20px;
+        }
+
+        .btn{
+            text-decoration:none;
+            padding:10px 15px;
+            border-radius:5px;
+            color:white;
+            font-weight:bold;
+        }
+
+        .add-btn{
+            background:#28a745;
+        }
+
+        .edit-btn{
+            background:#007bff;
+        }
+
+        .delete-btn{
+            background:#dc3545;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            background:white;
+            box-shadow:0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        th,td{
+            padding:12px;
+            border:1px solid #ddd;
+            text-align:center;
+        }
+
+        th{
+            background:#343a40;
+            color:white;
+        }
+
+        tr:nth-child(even){
+            background:#f9f9f9;
+        }
+        .logout-btn{
+    background:#dc3545;
+    color:white;
+    padding:10px 15px;
+    text-decoration:none;
+    border-radius:5px;
+    font-weight:bold;
+}
+
+.logout-btn:hover{
+    background:#c82333;
+}
+
+    </style>
+</head>
+<body>
+
+<h1>Medicine Management</h1>
+
+<div class="top-bar">
+    <a href="{% url 'add_medicine' %}" class="btn add-btn">
+        Add Medicine
+    </a>
+</div>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Medicine Name</th>
+            <th>Dosage</th>
+            <th>Price</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for medicine in medicines %}
+        <tr>
+            <td>{{ medicine.id }}</td>
+            <td>{{ medicine.name }}</td>
+            <td>{{ medicine.dosage }}</td>
+            <td>{{ medicine.price }}</td>
+            <td>{{ medicine.start_date }}</td>
+            <td>{{ medicine.end_date }}</td>
+
+            <td>
+                <a href="{% url 'edit_medicine' medicine.id %}"
+                   class="btn edit-btn">Edit</a>
+
+                <a href="{% url 'delete_medicine' medicine.id %}"
+                   class="btn delete-btn"
+                   onclick="return confirm('Delete this medicine?')">
+                   Delete
+                </a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="7">No medicines found</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<br><br>
+<h1>List of Registrations</h1>
+<table>
+    <thead>
+        <tr>
+            <td>ID</td>
+            <th>Username</th>
+            <th>First Name</th>
+            <th>Lastname</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>Address</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Blood Group</th>
+            <th>State</th>
+            <th>Created At</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for user in registrations %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.first_name}}</td>
+            <td>{{ user.last_name}}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.phone_number }}</td>
+            <td>{{ user.address }}</td>
+            <td>{{ user.age }}</td>
+            <td>{{ user.gender }}</td>
+            <td>{{ user.blood_group }}</td>
+            <td>{{ user.state }}</td>
+            <td>{{ user.created_at }}</td>
+
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="12">No detials found</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<br><br>
+
+<h1>Messages</h1>
+<table>
+    <thead>
+        <tr>
+            <td>ID</td>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Message</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for client in contacts %}
+        <tr>
+            <td>{{ client.id}}</td>
+            <td>{{ client.name }}</td>
+            <td>{{ client.email }}</td>
+            <td>{{ client.message }}</td>
+            <td>{{ client.created_at }}</td>
+
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">No detials found</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<br><br>
+<a href="{% url 'logout.html' %}" class="logout-btn"> Logout</a>
+</body>
+</html>

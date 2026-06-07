@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Medicine</title>
+    <style>
+        body{
+            font-family:Arial,sans-serif;
+           background-image:url('https://images.unsplash.com/photo-1587854692152-cbe660dbde88');
+           background-size:cover;
+            background-position:center;
+            background-repeat:no-repeat;
+            margin:0;
+            padding:20px;
+        }
+
+        .container{
+            max-width:500px;
+            margin:auto;
+            background:rgb(227, 219, 219);
+            padding:25px;
+            border-radius:10px;
+            box-shadow:0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h2{
+            text-align:center;
+        }
+
+        button{
+            background:#007bff;
+            color:white;
+            border:none;
+            padding:10px 15px;
+            cursor:pointer;
+            border-radius:5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Edit Medicine</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit">Update</button>
+        <a href="{% url 'main.html' %}">Cancel</a>
+    </form>
+</div>
+
+</body>
+</html>

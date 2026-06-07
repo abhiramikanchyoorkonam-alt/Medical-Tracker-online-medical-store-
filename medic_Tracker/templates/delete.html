@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete Medicine</title>
+    <style>
+        body{
+            font-family:Arial,sans-serif;
+            background:#f4f4f4;
+            padding:30px;
+        }
+
+        .container{
+            max-width:450px;
+            margin:auto;
+            background:white;
+            padding:25px;
+            border-radius:10px;
+            text-align:center;
+            box-shadow:0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .delete-btn{
+            background:red;
+            color:white;
+            border:none;
+            padding:10px 15px;
+            border-radius:5px;
+            cursor:pointer;
+        }
+
+        .cancel-btn{
+            text-decoration:none;
+            margin-left:10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Delete Medicine</h2>
+
+    <p>
+        Are you sure you want to delete
+        <strong>{{ medicine.name }}</strong> ?
+    </p>
+
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="delete-btn">
+            Yes, Delete
+        </button>
+
+        <a href="{% url 'main.html' %}" class="cancel-btn">
+            Cancel
+        </a>
+    </form>
+</div>
+
+</body>
+</html>

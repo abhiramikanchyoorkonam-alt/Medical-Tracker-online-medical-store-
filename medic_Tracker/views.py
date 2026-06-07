@@ -1,7 +1,8 @@
 from django.http import HttpResponse
-from django.shortcuts import render,redirect,get_list_or_404
-from .forms import ContactForm, loginForm, regForm
-from .models import Medicine, Contact
+from django.shortcuts import render,redirect,get_object_or_404
+from .forms import ContactForm, LoginForm, regForm,MedicineForm
+from django.contrib.auth import authenticate,login
+from .models import Medicine, Contact,registration
 
 def about(request):
     return render(request, 'about.html')
@@ -60,25 +61,68 @@ def search(request):
         'medicines': medicines,
         'query': query
     })
-
+from .models import registration
+from .forms import LoginForm
 
 def login(request):
+
     error_message = None
-    form = loginForm()
 
-    if request.method == 'POST':
-        form = loginForm(request.POST)
+    if request.method == "POST":
 
-        if form.is_valid():
-            form.save()  # optional
-        else:
-            error_message = "Invalid username or password."
+        username = request.POST.get("username")
+        password = request.POST.get("password")
 
-    return render(request, 'login.html', {
-        'form': form,
-        'error_message': error_message
-    })
-def user_interface(request):
-    return render(request, 'user_interface.html')
+        # Admin Login
+        if username == "admin" and password == "password":
+            return redirect('main.html')
+    return render(request,'login.html',{'error_message': error_message})
+
 def logout(request):
-    return render(request, 'logout.html')
+    return render(request, 'home.html')
+
+def admin_interface(request):
+    medicines = Medicine.objects.all()
+    contacts = Contact.objects.all()
+    registrations = registration.objects.all()
+
+    print("REGISTRATIONS:", registrations)
+    print("COUNT:", registrations.count())
+
+    return render(request, 'main.html', {
+        'medicines': medicines,
+        'contacts': contacts,
+        'registrations': registrations,
+    })
+
+
+
+def add_medicine(request):
+    form = MedicineForm(request.POST or None)
+
+    if form.is_valid():
+        form.save()
+        return redirect('main.html')
+
+    return render(request,'add.html',{'form':form})
+
+def edit_medicine(request,id):
+    medicine = get_object_or_404(Medicine,id=id)
+
+    form = MedicineForm(request.POST or None,instance=Medicine)
+
+    if form.is_valid():
+        form.save()
+        return redirect('main.html')
+
+    return render(request,'edit.html',{'form':form})
+
+def delete_medicine(request, id):
+    medicine = get_object_or_404(Medicine, id=id)
+
+    if request.method == "POST":
+        medicine.delete()
+        return redirect('main.html')
+
+    return render( request,'delete.html',{'medicine': medicine})
+
